@@ -52,7 +52,7 @@ function BlackList:HookFunctions()
 end
 
 -- Hooked ChatFrame_MessageEventHandler function
-function BlackList_MessageEventHandler(event, ...)
+function BlackList_MessageEventHandler(event)
 
 	local warnplayer, warnname = false, nil;
 
@@ -95,7 +95,7 @@ function BlackList_MessageEventHandler(event, ...)
 		end
 	end
 
-	local returnvalue = Orig_ChatFrame_MessageEventHandler(event, ...);
+	local returnvalue = Orig_ChatFrame_MessageEventHandler(event);
 
 	if (warnplayer) then
 		this:AddMessage(warnname .. " is on your blacklist", 1.0, 0.0, 0.0);
