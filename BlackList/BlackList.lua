@@ -178,6 +178,7 @@ function BlackList:HandleEvent(event)
 					Already_Warned_For["TARGET"][name]=GetTime();
 					PlaySound("PVPTHROUGHQUEUE");
 					BlackList:AddErrorMessage(name .. " is on your blacklist", "red", 5);
+					BlackList:AddMessage(name .. " is on your blacklist for reason: " .. player["reason"], "yellow");
 				end
 			end
 		end
@@ -202,6 +203,7 @@ function BlackList:HandleEvent(event)
 					Already_Warned_For["MOUSEOVER"][name]=GetTime();
 					PlaySound("PVPTHROUGHQUEUE");
 					BlackList:AddErrorMessage(name .. " is on your blacklist", "red", 5);
+					BlackList:AddMessage(name .. " is on your blacklist for reason: " .. player["reason"], "yellow");
 				end
 			end
 		end
