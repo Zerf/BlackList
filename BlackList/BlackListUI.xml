@@ -172,7 +172,6 @@
 					<OnClick>
 						BlackList:RemovePlayer();
 						BlackListDetailsFrame:Hide();
-						BlackListEditDetailsFrame:Hide();
 					</OnClick>
 					<OnEnter>
 						
@@ -450,7 +449,6 @@
 			</OnShow>
 			<OnHide>
 				BlackListDetailsFrame:Hide();
-				BlackListEditDetailsFrame:Hide();
 			</OnHide>
 		</Scripts>
 	</Frame>
@@ -587,26 +585,6 @@
 					</Layer>
 				</Layers>
 			</Frame>
-			<Button name="BlackListDetailsEditButton" inherits="UIPanelButtonTemplate" text="Edit">
-				<Size>
-					<AbsDimension x="66" y="22" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="BlackListDetailsLevel" relativePoint="BOTTOMLEFT">
-						<Offset>
-							<AbsDimension x="174" y="9" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						BlackListEditDetailsFrame:Show();
-					</OnClick>
-				</Scripts>
-				<NormalFont inherits="GameFontNormalSmall" />
-				<HighlightFont inherits="GameFontHighlightSmall" />
-				<DisabledFont inherits="GameFontDisableSmall" />
-			</Button>
 			<CheckButton name="BlackListDetailsFrameCheckButton1" inherits="BlackListDetailsCheckButtonTemplate" id="1">
 				<Size>
 					<AbsDimension x="24" y="24" />
@@ -712,184 +690,6 @@
 		</Frames>
 		<Scripts>
 			<OnHide>
-				BlackListEditDetailsFrame:Hide();
-			</OnHide>
-		</Scripts>
-	</Frame>
-
-	<Frame name="BlackListEditDetailsFrame" toplevel="true" parent="UIParent" movable="true" enableMouse="true" hidden="true">
-		<Size>
-			<AbsDimension x="297" y="90" />
-		</Size>
-		<Anchors>
-			<Anchor point="TOPLEFT" relativeTo="BlackListDetailsFrame" relativePoint="BOTTOMLEFT">
-				<Offset>
-					<AbsDimension x="0" y="2" />
-				</Offset>
-			</Anchor>
-		</Anchors>
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11" />
-			</BackgroundInsets>
-			<TileSize>
-				<AbsValue val="32" />
-			</TileSize>
-			<EdgeSize>
-				<AbsValue val="32" />
-			</EdgeSize>
-		</Backdrop>
-		<Layers>
-		</Layers>
-		<Frames>
-			<Frame name="BlackListEditDetailsFrameLevelBackground">
-				<Size>
-					<AbsDimension x="38" y="30" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="23" y="-18" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-					<EdgeSize>
-						<AbsValue val="16" />
-					</EdgeSize>
-					<TileSize>
-						<AbsValue val="16" />
-					</TileSize>
-					<BackgroundInsets>
-						<AbsInset left="5" right="5" top="5" bottom="5" />
-					</BackgroundInsets>
-				</Backdrop>
-				<Frames>
-					<EditBox name="BlackListEditDetailsFrameLevel" autoFocus="false" frameStrata="HIGH" historyLines="32">
-						<Size>
-							<AbsDimension x="64" y="32" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="9" y="1" />
-								</Offset>
-							</Anchor>
-						</Anchors>
-						<Scripts>
-							<OnEscapePressed>
-								this:ClearFocus();
-							</OnEscapePressed>
-						</Scripts>
-						<FontString inherits="ChatFontNormal" bytes="3" />
-					</EditBox>
-				</Frames>
-				<Scripts>
-					<OnLoad>
-						this:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
-						this:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
-					</OnLoad>
-					<OnShow>
-					</OnShow>
-				</Scripts>
-			</Frame>
-			<Frame name="BlackListEditDetailsFrameClassDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="BlackListEditDetailsFrameLevelBackground" relativePoint="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="-6" y="-1" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						BlackListEditDetailsFrameClassDropDown_OnLoad();
-					</OnLoad>
-					<OnShow>
-						UIDropDownMenu_Initialize(this, BlackListEditDetailsFrameClassDropDown_Initialize);
-						UIDropDownMenu_SetSelectedID(BlackListEditDetailsFrameClassDropDown, 1);
-					</OnShow>
-					<OnClick>
-						ToggleDropDownMenu(1, nil, BlackListEditDetailsFrameClassDropDown, "BlackListEditDetailsFrameClassDropDown", 0, 0);
-					</OnClick>
-				</Scripts>
-			</Frame>
-			<Frame name="BlackListEditDetailsFrameRaceDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="BlackListEditDetailsFrameClassDropDown" relativePoint="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="-18" y="0" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						BlackListEditDetailsFrameRaceDropDown_OnLoad();
-					</OnLoad>
-					<OnShow>
-						UIDropDownMenu_Initialize(this, BlackListEditDetailsFrameRaceDropDown_Initialize);
-						UIDropDownMenu_SetSelectedID(BlackListEditDetailsFrameRaceDropDown, 1);
-					</OnShow>
-					<OnClick>
-						ToggleDropDownMenu(1, nil, BlackListEditDetailsFrameRaceDropDown, "BlackListEditDetailsFrameRaceDropDown", 0, 0);
-					</OnClick>
-				</Scripts>
-			</Frame>
-			<Button name="BlackListEditDetailsFrameSaveButton" inherits="UIPanelButtonTemplate" text="Save">
-				<Size>
-					<AbsDimension x="131" y="21" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="BlackListEditDetailsFrame">
-						<Offset>
-							<AbsDimension x="18" y="-51" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						BlackListEditDetailsSaveButton_OnClick();
-					</OnClick>
-					<OnEnter>
-						
-					</OnEnter>
-					<OnLeave>
-						
-					</OnLeave>
-				</Scripts>
-			</Button>
-			<Button name="BlackListEditDetailsFrameCancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
-				<Size>
-					<AbsDimension x="131" y="21" />
-				</Size>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="BlackListEditDetailsFrameSaveButton" relativePoint="RIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						BlackListEditDetailsFrame:Hide();
-					</OnClick>
-					<OnEnter>
-						
-					</OnEnter>
-					<OnLeave>
-						
-					</OnLeave>
-				</Scripts>
-			</Button>
-		</Frames>
-		<Scripts>
-			<OnShow>
-				BlackListEditDetailsFrame_Update();
-			</OnShow>
-			<OnHide>
-				BlackListEditDetailsFrameLevel:SetText("");
-				UIDropDownMenu_SetSelectedID(BlackListEditDetailsFrameClassDropDown, 1);
-				UIDropDownMenu_SetSelectedID(BlackListEditDetailsFrameRaceDropDown, 1);
 			</OnHide>
 		</Scripts>
 	</Frame>
