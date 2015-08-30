@@ -42,6 +42,12 @@ function BlackList:AddPlayer(player, warn, ignore, reason)
 	-- timestamp
 	added = time();
 
+	-- lower the name and upper the first letter, not for chinese and korean though
+	if ((GetLocale() ~= "zhTW") and (GetLocale() ~= "zhCN") and (GetLocale() ~= "koKR")) then
+		local _, len = string.find(name, "[%z\1-\127\194-\244][\128-\191]*");
+		name = string.upper(string.sub(name, 1, len)) .. string.lower(string.sub(name, len + 1));
+	end
+	
 	player = {["name"] = name, ["warn"] = warn, ["ignore"] = ignore, ["reason"] = reason, ["added"] = added, ["level"] = level, ["class"] = class, ["race"] = race};
 	table.insert(BlackListedPlayers[GetRealmName()], player);
 
@@ -85,6 +91,11 @@ function BlackList:UpdateDetails(index, ignore, warn, reason, level, class, race
 
 	-- update player
 	local player = self:GetPlayerByIndex(index);
+	-- for old version i have to convert old name format (there was no format...) in new "Name" format
+	if ((GetLocale() ~= "zhTW") and (GetLocale() ~= "zhCN") and (GetLocale() ~= "koKR")) then
+		local _, len = string.find(player["name"], "[%z\1-\127\194-\244][\128-\191]*");
+		player["name"] = string.upper(string.sub(player["name"], 1, len)) .. string.lower(string.sub(player["name"], len + 1));
+	end
 	if (ignore ~= nil) then
 		player["ignore"] = ignore:GetChecked();
 	end

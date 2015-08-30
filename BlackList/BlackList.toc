@@ -1,6 +1,6 @@
 ## Interface: 20100
 ## Title: BlackList Continued
-## Version: 1.00
+## Version: 1.02
 ## Author: Logan
 ## eMail: a.donati@gmail.com
 ## Notes: Keeps a list of enemy and friendly players warning you if target or mouse over them.
